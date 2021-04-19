@@ -15,6 +15,7 @@ function App() {
       <PublicNavbar setKeyword={setKeyword} setSearchBy={setSearchBy} />
       <Router>
         <Switch>
+          <Route path="/movie/:id" exact component={MovieDetail} />
           <Route
             path="/"
             exact
@@ -26,7 +27,6 @@ function App() {
               />
             )}
           />
-          <Route path="movie/:id" exact component={MovieDetail} />
         </Switch>
       </Router>
     </div>

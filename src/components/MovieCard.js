@@ -7,6 +7,7 @@ import {
   Badge,
   Modal,
 } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
 
 const apiKey = process.env.REACT_APP_APIKEY;
 function MyVerticallyCenteredModal(props) {
@@ -43,6 +44,7 @@ function MyVerticallyCenteredModal(props) {
 export default function MovieCard({ movie, genres }) {
   let [modalShow, setModalShow] = useState(false);
   let [link, setLink] = useState("");
+  let history = useHistory();
 
   const openTrailer = async () => {
     let url = `https://api.themoviedb.org/3/movie/${movie.id}/videos?api_key=${apiKey}&language=en-US`;
@@ -51,9 +53,13 @@ export default function MovieCard({ movie, genres }) {
     setModalShow(true);
     setLink(data.results[0].key);
   };
+
+  const getDetailPage = () => {
+    history.push(`/movie/${movie.id}`);
+  };
   return (
     <>
-      <Card style={{ width: "18rem" }}>
+      <Card style={{ width: "18rem" }} onClick={getDetailPage}>
         <Card.Img
           style={{ height: "430px" }}
           variant="top"
